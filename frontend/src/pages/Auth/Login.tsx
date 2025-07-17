@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { AuthLayout } from '../../components/layouts/AuthLayout'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Input } from '../../components/inputs/Input';
+import { validateEmail } from '../../utils/helper';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -10,9 +11,23 @@ function Login() {
 
   const navigate = useNavigate();
 
-  async function handleLogin(e):any{
+  const handleLogin = async (e) => {
+  e.preventDefault();
 
+  if (!validateEmail(email)) {
+    setError('Please Enter valid email');
+    return;
   }
+
+  if (!password) {
+    setError("Please enter right password");
+    return;
+  }
+
+  setError("");  // Clear any previous errors
+  // Proceed with your login logic here...
+};
+
 
   
   return (
@@ -22,7 +37,25 @@ function Login() {
           <p className='text-xs mt-[5px] mb-6 text-gray-600'>Please log in to continue</p>
           <form onSubmit={handleLogin}>
             <Input value={email} onChange={({target})=>{
-              setEmail(target.value)}}  type='text' placeholder='neelesh@gmail.com'/>
+              setEmail(target.value)}} label='Email Address' type='text' placeholder='neelesh@gmail.com'/>
+              <Input value={password} onChange={({target})=>{
+              setPassword(target.value)}} label='Password' type='password' placeholder='Min 8 Char'/>
+              {error && <p className='text-red-600 text-xl '>{error}</p> }
+
+              <button type='submit' className='btn-primary'>LOGIN
+
+              </button>
+
+              <p className='text-[13px] text-slate-500 mt-3'>
+                Don't have an account ? {" "}
+                <Link className="font-medium text-primary underline" to = '/signup'> SignUp</Link>
+              </p>
+
+
+
+
+
+
           </form>
 
         </div>
