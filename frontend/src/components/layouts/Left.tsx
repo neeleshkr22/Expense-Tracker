@@ -1,13 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+
+const quotes = [
+  "Track every rupee, save every day.",
+  "Let your money tell a story.",
+  "Budget today, freedom tomorrow.",
+  "Small savings, big future.",
+  "Expense tracking = Financial winning."
+];
 
 export const Left = () => {
-  return (
-    <div>
-        <div className='hidden md:block w-[50vw] h-screen bg-slate-400 px-12 pt-[50vh] pb-12'>
-            <h1 className='font-mono flex  justify-center '>Expense tracker quote is here. this will update everyday ig</h1>
-            <h4 className='text-slate-500 flex justify-end'>~by Neelesh Kumar</h4>
+  const [quoteIndex, setQuoteIndex] = useState(0);
 
-        </div>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setQuoteIndex((prev) => (prev + 1) % quotes.length);
+    }, 3000); // Change quote every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div
+      className='hidden md:flex w-[50vw] h-screen bg-cover bg-center items-center justify-center p-8'
+      style={{
+        backgroundImage: `url('/gradii-1920x1080.png')`,  // Place image in public folder
+      }}
+    >
+      <div className='text-center text-white transition-all duration-500 ease-in-out'>
+        <h1 className='text-2xl md:text-3xl font-semibold font-mono animate-fade'>
+          {quotes[quoteIndex]}
+        </h1>
+        
+      </div>
+      <h4 className='text-slate-300 text-sm mt-[90px] items-end '>~ by NK</h4>
     </div>
-  )
-}
+  );
+};

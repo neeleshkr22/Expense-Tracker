@@ -12,53 +12,65 @@ function Login() {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!validateEmail(email)) {
-    setError('Please Enter valid email');
-    return;
-  }
+    if (!validateEmail(email)) {
+      setError('Please Enter valid email');
+      return;
+    }
 
-  if (!password) {
-    setError("Please enter right password");
-    return;
-  }
+    if (!password) {
+      setError("Please enter right password");
+      return;
+    }
 
-  setError("");  // Clear any previous errors
-  // Proceed with your login logic here...
-};
+    setError("");  // Clear any previous errors
+    // Proceed with your login logic here...
+  };
 
 
-  
+
   return (
     <AuthLayout>
-        <div className='lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center items-center bg-white shadow-lg rounded-lg p-8'>
-          <h3 className='text-2xl font-semibold mb-2'>Welcome Back</h3>
-          <p className='text-xs mt-[5px] mb-6 text-gray-600'>Please log in to continue</p>
-          <form onSubmit={handleLogin}>
-            <Input value={email} onChange={({target})=>{
-              setEmail(target.value)}} label='Email Address' type='text' placeholder='neelesh@gmail.com'/>
-              <Input value={password} onChange={({target})=>{
-              setPassword(target.value)}} label='Password' type='password' placeholder='Min 8 Char'/>
-              {error && <p className='text-red-600 text-xl '>{error}</p> }
+      <div className='lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center items-center bg-white shadow-lg rounded-lg p-8'>
+        <h3 className='text-2xl font-semibold mb-2'>Welcome Back</h3>
+        <p className='text-xs mt-[5px] mb-6 text-gray-600'>Please log in to continue</p>
+        <form onSubmit={handleLogin}>
+          <Input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            label="Email Address"
+            type="text"
+            placeholder="neelesh@gmail.com"
+          />
 
-              <button type='submit' className='btn-primary'>LOGIN
+          <Input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            label="Password"
+            type="password"
+            placeholder="Min 8 Characters"
+          />
 
-              </button>
+          {error && <p className='text-red-600 text-xl '>{error}</p>}
 
-              <p className='text-[13px] text-slate-500 mt-3'>
-                Don't have an account ? {" "}
-                <Link className="font-medium text-primary underline" to = '/signup'> SignUp</Link>
-              </p>
+          <button type='submit' className='btn-primary'>LOGIN
+
+          </button>
+
+          <p className='text-[13px] text-slate-500 mt-3'>
+            Don't have an account ? {" "}
+            <Link className="font-medium text-blue-900 underline" to='/signup'> SignUp</Link>
+          </p>
 
 
 
 
 
 
-          </form>
+        </form>
 
-        </div>
+      </div>
     </AuthLayout>
   )
 }
