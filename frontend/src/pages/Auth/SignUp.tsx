@@ -4,6 +4,7 @@ import { AuthLayout } from '../../components/layouts/AuthLayout'
 import { useNavigate, Link } from 'react-router-dom';
 import { Input } from '../../components/inputs/Input';
 import { validateEmail } from '../../utils/helper';
+import ProfilePhotoSelector from '../../components/inputs/ProfilePhotoSelector';
 
 
 const SignUp = () => {
